@@ -35,3 +35,11 @@ Compile `foodLines.c` and run it with input from `foodLines.txt`:
 ```bash
 gcc foodLines.c -o main && ./main < foodLines.txt
 ```
+
+### Snowflakes Problem
+
+Compile `snowflakes.c` and run it with input from `snowflakes.txt`:
+
+```bash
+gcc snowflakes.c -o main && ./main < snowflakes.txt
+```
