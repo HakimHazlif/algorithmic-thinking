@@ -3,15 +3,15 @@
 #define MAX_LINES 100000
 #define ARMS 6
 
-int get_the_start_point(int first[ARMS], int second[ARMS]);
+int get_the_start_point(int first[], int second[]);
 int  check_towords(int first[], int second[], int start_point, char dir);
-int are_two_snowflakes_identicals(int first[ARMS], int second[ARMS]);
-int solve(int snowflakes[][ARMS], int n);
-void printSnowflake(int snowflake[ARMS], int lineNum);
+int are_two_snowflakes_identicals(int first[], int second[]);
+void solve(int snowflakes[][ARMS], int n);
+void printSnowflake(int snowflake[], int lineNum);
 
 int main() {
     int n;
-    int snowflakes[MAX_LINES][ARMS];
+    static int snowflakes[MAX_LINES][ARMS];
 
     scanf("%d", &n);
 
@@ -43,8 +43,7 @@ int main() {
 }
 
 
-int get_the_start_point(int first[ARMS], int second[ARMS]) {
-
+int get_the_start_point(int first[], int second[]) {
     for (int i = 0; i < ARMS; i++) {
         if (first[0] == second[i]) {
             return i;
@@ -53,6 +52,7 @@ int get_the_start_point(int first[ARMS], int second[ARMS]) {
 
     return -1;
 }
+
 
 int check_towords(int first[], int second[], int start_point, char dir) {
     int pos = start_point;
@@ -68,32 +68,31 @@ int check_towords(int first[], int second[], int start_point, char dir) {
     return 1;
 }
 
-int are_two_snowflakes_identicals(int first[ARMS], int second[ARMS]) {
+int are_two_snowflakes_identicals(int first[], int second[]) {
     int start_point = get_the_start_point(first, second);
 
     if (start_point == -1) return 0;
-        
+          
     return check_towords(first, second, start_point, 'r') || check_towords(first, second, start_point, 'l');
 }
 
-
-int solve(int snowflakes[][ARMS], int n) {
+// (n(n - 1))/2 
+// In the worst case with 100,000 line the amount of operations is 4,999,950,000 
+void solve(int snowflakes[][ARMS], int n) {
     for (int i = 0; i < n - 1; i++) {
         for (int j = i+1; j < n; j++) {
-          
             if (are_two_snowflakes_identicals(snowflakes[i], snowflakes[j])) {
                 printf("Twin snowflakes found.\n");
-                return 0;
+                return;
             }
         }
     }
 
     printf("No two snowflakes are alike.\n");
-    return 0;
 }
 
 
-void printSnowflake(int snowflake[ARMS], int lineNum) {
+void printSnowflake(int snowflake[], int lineNum) {
     printf("Line %d: [ ", lineNum);
     for (int j = 0; j < ARMS; j++) {
         printf("%d, ", snowflake[j]);
@@ -101,6 +100,3 @@ void printSnowflake(int snowflake[ARMS], int lineNum) {
     printf("]\n");
 };
 
-
-// [ 12, 5, 18, 5, 12, 5, ]
-// [ 12, 5, 18, 5, 12, 5, ]
