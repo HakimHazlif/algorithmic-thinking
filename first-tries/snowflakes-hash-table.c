@@ -58,7 +58,6 @@ int main(void) {
 
         qsort(snowflake, ARMS, sizeof(int), compare);
         snowflakes[i] = oaat((char *)snowflake, sizeof(snowflake), 17);
-        printf("%d\n", snowflakes[i]);
     }
 
     solve(snowflakes, n);
@@ -72,7 +71,6 @@ void solve(int snowflakes[], int n) {
     qsort(snowflakes, n, sizeof(int), compare);
 
     for (int i = 0; i < n - 1; i++) {
-        printf("%d == %d\n", snowflakes[i], snowflakes[i+1]);
         if (snowflakes[i] == snowflakes[i+1]) {
             printf("Twin snowflakes found.\n");
             return;
